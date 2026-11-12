@@ -1,0 +1,16 @@
+# local agent / OS files
+.claude/
+.DS_Store
+
+# app (created on prototype day)
+node_modules/
+app/.expo/
+app/android/
+app/ios/
+app/dist/
+*.apk
+*.aab
+*.keystore
+*.jks
+.env
+.env.*

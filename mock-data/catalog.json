@@ -1,0 +1,111 @@
+{
+  "_source": "Observed in the Eggoz Android app v1.0.7 on 2026-11-12 (guest, Gurugram). Fields set to null were not visible on screen. Images are intentionally not included - use royalty-free images and credit them in app/assets/CREDITS.md.",
+  "header": {
+    "title": "Order before Midnight",
+    "subtitle": "Delivery Before Sunrise",
+    "coins": 0,
+    "walletBalance": 0,
+    "searchPlaceholder": "Search for Brown eggs"
+  },
+  "valueProps": ["Daily Subscription", "Fresh Morning Deliveries", "Rewards & Benefits"],
+  "banners": [
+    { "id": "recharge-250", "title": "Get ₹250 extra", "subtitle": "on recharge of ₹500 · only for 1000 customers", "action": "wallet" },
+    { "id": "subscribe-5", "title": "Get 5% off", "subtitle": "on subscription", "action": "subscribe" },
+    { "id": "fresh-door", "title": "Fresh at your door", "subtitle": "Next morning delivery", "action": "home" }
+  ],
+  "categories": [
+    { "id": "protein-plus", "name": "Protein Plus", "promoTitle": "Protein Plus Eggs", "promoText": "Packed with 70g protein, larger eggs & rich orange yolks", "startingPrice": 138, "packRange": "10 piece - 10 piece" },
+    { "id": "white", "name": "White", "promoTitle": "White Eggs", "promoText": "Protein-packed with orange yolks and herbal feed", "startingPrice": null, "packRange": "6 piece - 30 piece" },
+    { "id": "brown", "name": "Brown", "promoTitle": "Brown Eggs", "promoText": null, "startingPrice": null, "packRange": null, "_note": "Category exists in the app; its products were not captured. Create clearly-labelled placeholder products if needed." }
+  ],
+  "products": [
+    {
+      "id": "everyday-white-25",
+      "name": "Eggoz Every Day White Protein Rich Eggs",
+      "categoryId": "white",
+      "packSize": 25,
+      "eggSize": "M",
+      "price": 261,
+      "mrp": 319,
+      "pricePerEgg": 10.44,
+      "earnCoins": 10,
+      "bestSeller": true
+    },
+    {
+      "id": "protein-plus-10",
+      "name": "Eggoz Nutrition Protein Plus Eggs",
+      "categoryId": "protein-plus",
+      "packSize": 10,
+      "eggSize": "XL",
+      "price": 138,
+      "mrp": 189,
+      "pricePerEgg": 13.8,
+      "earnCoins": 5,
+      "bestSeller": true,
+      "discountLabel": "₹51 OFF",
+      "nutritionPer100g": { "energyKcal": 154, "proteinG": 13, "fatG": 11, "calciumMg": 51 },
+      "subscriptionOffer": "Subscribe now and get an extra 5% off on this product!"
+    },
+    {
+      "id": "nutrition-white-30",
+      "name": "Eggoz Nutrition White Eggs",
+      "_nameNote": "Full name was truncated on screen",
+      "categoryId": "white",
+      "packSize": 30,
+      "eggSize": "L",
+      "price": 352,
+      "mrp": 529,
+      "pricePerEgg": 11.73,
+      "earnCoins": 14,
+      "bestSeller": true
+    },
+    {
+      "id": "nutrition-white-10",
+      "name": "Eggoz Nutrition White Eggs",
+      "_nameNote": "Full name was truncated on screen",
+      "categoryId": "white",
+      "packSize": 10,
+      "eggSize": "L",
+      "price": 146,
+      "mrp": 185,
+      "pricePerEgg": 14.6,
+      "earnCoins": null,
+      "bestSeller": false
+    },
+    {
+      "id": "nutrition-white-6",
+      "name": "Eggoz Nutrition White Eggs",
+      "_nameNote": "Full name was truncated on screen",
+      "categoryId": "white",
+      "packSize": 6,
+      "eggSize": "L",
+      "price": 119,
+      "mrp": null,
+      "pricePerEgg": 19.83,
+      "earnCoins": null,
+      "bestSeller": false
+    }
+  ],
+  "trustCards": [
+    { "title": "Supporting Local Farms", "text": "Sourced directly from trusted local poultry farms to ensure freshness and support Indian farmers.", "tag": "Farm Fresh Everyday" },
+    { "title": "Protein Rich Eggs", "text": "Naturally rich in high-quality protein, vitamins, and essential minerals for your daily nutrition.", "tag": "13g Protein / 100g" },
+    { "title": "11 Safety Checks", "text": "Every egg undergoes multiple quality and hygiene checks before reaching your doorstep.", "tag": "Quality Assured" }
+  ],
+  "search": {
+    "popular": ["White Egg", "Brown Egg", "6 piece", "10 piece"]
+  },
+  "wallet": {
+    "quickAmounts": [500, 1000, 2000],
+    "coinsLabel": "Pay using Eggoz Coins"
+  },
+  "homeSectionOrderObserved": [
+    "header", "heroCarousel", "Best Selling (everyday-white-25, protein-plus-10, nutrition-white-30)",
+    "category promo cards", "category grid (Protein Plus, White, Brown)",
+    "Protein Plus rail (protein-plus-10)", "White rail (nutrition-white-30, nutrition-white-10, nutrition-white-6)"
+  ],
+  "deliveryDefaults": {
+    "address": "Sector 29, Gurugram",
+    "slot": "Tomorrow, before 7 AM",
+    "subscriptionDiscountPct": 5
+  }
+}

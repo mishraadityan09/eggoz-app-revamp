@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Eggoz App Review</title>
+<style>
+  :root {
+    --ink: #1c1917; --ink-2: #44403c; --muted: #6b6560; --line: #e7e5e4; --line-2: #d6d3d1;
+    --paper: #ffffff; --cream: #fff8ee; --cream-2: #fdf0dc;
+    --accent: #c2410c; --accent-soft: #fff1e6;
+    --hi-bg: #fee2e2; --hi-ink: #991b1b; --md-bg: #ffedd5; --md-ink: #9a3412; --lo-bg: #ecfccb; --lo-ink: #3f6212;
+    --series-1: #2a78d6; --grid: #e7e5e4;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink);
+    font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; font-size: 9.4pt; line-height: 1.45; }
+  .page { width: 210mm; height: 297mm; padding: 16mm 16mm 18mm; position: relative; overflow: hidden; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .footer { position: absolute; left: 16mm; right: 16mm; bottom: 9mm; display: flex; justify-content: space-between;
+    font-size: 7.5pt; color: var(--muted); border-top: 0.25mm solid var(--line); padding-top: 2.5mm; }
+  .eyebrow { font-size: 7.6pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 650; }
+  h1 { font-size: 33pt; line-height: 1.05; margin: 3mm 0 0; letter-spacing: -0.02em; font-weight: 750; }
+  h2 { font-size: 16.5pt; line-height: 1.2; margin: 0 0 3mm; letter-spacing: -0.01em; font-weight: 720; }
+  h3 { font-size: 10.6pt; margin: 0 0 1.6mm; font-weight: 700; }
+  p { margin: 0 0 2.4mm; }
+  ul { margin: 0 0 2.4mm; padding-left: 4.2mm; } li { margin: 0 0 1.2mm; }
+  a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .muted { color: var(--muted); } .small { font-size: 8pt; } .tiny { font-size: 7.2pt; }
+  .lede { font-size: 11.2pt; color: var(--ink-2); line-height: 1.5; max-width: 150mm; }
+  .section-head { display: flex; align-items: baseline; gap: 3mm; margin-bottom: 1mm; }
+  .pill { display: inline-block; font-size: 7pt; font-weight: 700; padding: 0.5mm 2mm; border-radius: 10mm; letter-spacing: 0.02em; white-space: nowrap; }
+  .hi { background: var(--hi-bg); color: var(--hi-ink); } .md { background: var(--md-bg); color: var(--md-ink); } .lo { background: var(--lo-bg); color: var(--lo-ink); }
+  .id { font-weight: 750; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+  /* phone screenshots */
+  .phone { position: relative; border-radius: 4.5mm; overflow: hidden; border: 0.3mm solid var(--line-2);
+    box-shadow: 0 1.2mm 4mm rgba(28,25,23,0.10); background: #fafafa; line-height: 0; }
+  .phone img { width: 100%; display: block; }
+  .cap { font-size: 7.6pt; color: var(--muted); margin-top: 2mm; line-height: 1.35; }
+  .mk { position: absolute; transform: translate(-50%, -50%); background: var(--accent); color: #fff; font-size: 7.4pt;
+    font-weight: 750; line-height: 1; padding: 1.1mm 1.6mm; border-radius: 10mm; box-shadow: 0 0 0 0.6mm #fff, 0 0.6mm 1.6mm rgba(0,0,0,.25); }
+  .hl { position: absolute; border: 0.7mm solid var(--accent); border-radius: 2mm; box-shadow: 0 0 0 0.6mm rgba(255,255,255,.85); }
+
+  /* cover */
+  .cover { background: var(--cream); }
+  .cover-phones { display: flex; justify-content: center; align-items: flex-end; gap: 6mm; margin: 9mm 0 9mm; }
+  .cover-phones .phone:nth-child(1), .cover-phones .phone:nth-child(3) { width: 43mm; }
+  .cover-phones .phone:nth-child(2) { width: 50mm; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3.5mm; }
+  .kpi { background: var(--paper); border: 0.25mm solid var(--line); border-radius: 3mm; padding: 3.2mm 3.5mm; }
+  .kpi .v { font-size: 20pt; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .kpi .l { font-size: 7.8pt; color: var(--ink-2); margin-top: 1mm; line-height: 1.3; }
+  .prepared { margin-top: 8mm; display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; font-size: 8.6pt; }
+  .prepared b { display: block; font-size: 7.2pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1mm; font-weight: 650; }
+  .disclaimer { position: absolute; left: 16mm; right: 16mm; bottom: 10mm; font-size: 7pt; color: var(--muted); line-height: 1.4; }
+
+  /* tables */
+  table { width: 100%; border-collapse: collapse; font-size: 8.3pt; }
+  th { text-align: left; font-size: 7pt; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 650;
+    border-bottom: 0.35mm solid var(--ink); padding: 1.6mm 2mm 1.6mm 0; }
+  td { border-bottom: 0.25mm solid var(--line); padding: 2mm 2mm 2mm 0; vertical-align: top; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.good td { color: var(--ink-2); }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; }
+  .box { border: 0.25mm solid var(--line); border-radius: 3mm; padding: 4mm 4.5mm; }
+  .box.cream { background: var(--cream); border-color: var(--cream-2); }
+  .callout { background: var(--accent-soft); border-left: 0.9mm solid var(--accent); border-radius: 1mm; padding: 3mm 4mm; font-size: 8.4pt; color: var(--ink-2); }
+  .finding { border-top: 0.25mm solid var(--line); padding: 2.6mm 0 2.2mm; }
+  .finding:first-child { border-top: none; padding-top: 0; }
+  .finding .t { display: flex; gap: 2mm; align-items: baseline; font-weight: 700; font-size: 9.4pt; margin-bottom: 0.8mm; }
+  .finding p { margin: 0; color: var(--ink-2); font-size: 8.5pt; }
+  .fix { color: var(--ink) !important; margin-top: 1mm !important; }
+  .fix::before { content: "Fix  "; font-weight: 750; color: var(--accent); }
+
+  /* chart */
+  .chart { margin: 2mm 0 1mm; }
+  .chart-title { font-weight: 700; font-size: 9.4pt; margin-bottom: 0.6mm; }
+  .chart-sub { font-size: 7.8pt; color: var(--muted); margin-bottom: 7mm; }
+  .bars { position: relative; }
+  .row { display: grid; grid-template-columns: 58mm 1fr; align-items: center; height: 8.4mm; }
+  .row .lab { font-size: 8.2pt; color: var(--ink); padding-right: 3mm; line-height: 1.2; }
+  .row .lab span { display: block; font-size: 7pt; color: var(--muted); }
+  .track { position: relative; height: 100%; }
+  .bar { position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 4.2mm; background: var(--series-1); border-radius: 0 1.1mm 1.1mm 0; }
+  .val { position: absolute; top: 50%; transform: translateY(-50%); font-size: 8pt; color: var(--ink-2); font-variant-numeric: tabular-nums;
+    margin-left: 1.2mm; padding: 0 1mm; background: var(--paper); }
+  .strip.strip-sm { grid-template-columns: repeat(3, 46mm); justify-content: space-between; }
+  .narrow .finding .t { flex-direction: column; align-items: flex-start; gap: 1mm; }
+  .plot-overlay { position: absolute; left: 58mm; right: 0; top: 0; bottom: 0; pointer-events: none; }
+  .gl { position: absolute; top: 0; bottom: 0; border-left: 0.2mm solid var(--grid); }
+  .gl span { position: absolute; bottom: -4.4mm; transform: translateX(-50%); font-size: 6.8pt; color: var(--muted); }
+  .target { position: absolute; top: -1mm; bottom: 0; border-left: 0.35mm dashed var(--ink-2); }
+  .target span { position: absolute; top: -4mm; left: 1mm; font-size: 7pt; color: var(--ink-2); white-space: nowrap; font-weight: 600; }
+
+  .strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7mm; }
+  .grid-shot { display: grid; grid-template-columns: 54mm 1fr; gap: 8mm; }
+  .phase { display: grid; grid-template-columns: 30mm 1fr; gap: 4mm; padding: 3mm 0; border-top: 0.25mm solid var(--line); }
+  .phase:first-of-type { border-top: none; }
+  .phase .when { font-weight: 750; } .phase .when span { display: block; font-weight: 500; font-size: 7.6pt; color: var(--muted); }
+  .swatch { display: inline-block; width: 3mm; height: 3mm; border-radius: 0.6mm; vertical-align: -0.4mm; margin-right: 1mm; border: 0.2mm solid rgba(0,0,0,.15); }
+</style>
+</head>
+<body>
+
+<!-- ============ 1. COVER ============ -->
+<section class="page cover">
+  <div class="eyebrow">Independent app review · November 2026</div>
+  <h1>Eggoz Consumer App<br><span style="color:var(--accent)">UX &amp; Performance Review</span></h1>
+  <p class="lede" style="margin-top:5mm">A hands-on review of the Eggoz Android app (v1.0.7): what slows it down, where users get stuck,
+    and a prioritised React Native plan to make it faster and easier to order from.</p>
+
+  <div class="cover-phones">
+    <div class="phone"><img src="screens/load-2-partial.png" alt=""></div>
+    <div class="phone"><img src="screens/home.png" alt=""></div>
+    <div class="phone"><img src="screens/product.png" alt=""></div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">~9 s</div><div class="l">from tapping the icon to home content (3 cold launches)</div></div>
+    <div class="kpi"><div class="v">47%</div><div class="l">of frames janky while the hero carousel plays</div></div>
+    <div class="kpi"><div class="v">20</div><div class="l">findings across performance, UX and accessibility</div></div>
+    <div class="kpi"><div class="v">7</div><div class="l">rated high priority, with a fix for each</div></div>
+  </div>
+
+  <div class="prepared">
+    <div><b>Prepared by</b>Adityan · React Native &amp; Flutter Developer<br><a href="https://adityan-phi.vercel.app/en">adityan-phi.vercel.app/en</a></div>
+    <div><b>App reviewed</b>Eggoz (com.eggozconsumerapp) v1.0.7, build 19<br>Android 16 · guest mode · Gurugram location · 12 Nov 2026</div>
+  </div>
+
+  <div class="disclaimer">Independent, unsolicited review of the publicly available app. Not affiliated with or endorsed by Eggoz.
+    Screenshots are of the Eggoz app and are used only to illustrate the findings. No source code was accessed; causes are inferred from measurements and marked as such.</div>
+</section>
+
+<!-- ============ 2. SUMMARY ============ -->
+<section class="page">
+  <div class="eyebrow">01 · Summary</div>
+  <h2 style="margin-top:2mm">A strong product held back by its first 10 seconds</h2>
+  <p class="lede" style="font-size:10.4pt; margin-bottom:6mm">The app is built on a modern React Native stack and has great brand content. But the moment a new
+    customer opens it — the launch, the hero carousel, the first scroll — is slow and janky, and the paths to ordering
+    (location, Add, Subscribe, Cart) all have avoidable friction. Most of the fixes are incremental; no rewrite of the backend is needed.</p>
+
+  <div class="two" style="margin-bottom:7mm">
+    <div class="box cream">
+      <h3>What's working well</h3>
+      <ul class="small">
+        <li><b>Modern foundation.</b> Hermes, Reanimated and react-native-screens are already in place, so improvements can ship screen by screen.</li>
+        <li><b>Strong brand.</b> Warm palette, good product photography, recognisable ambassador campaign.</li>
+        <li><b>Good trust story</b> on the product page: nutrition facts, local farms, "11 safety checks".</li>
+        <li><b>Clear value proposition</b>: daily subscription, morning delivery, coins and wallet rewards.</li>
+        <li><b>Feed scrolling after load is smooth</b> (3–4% janky frames), proving the stack can perform.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>What's holding it back</h3>
+      <ul class="small">
+        <li><b>Slow, janky first impression.</b> ~9 s to home content; the hero carousel drops ~47% of frames.</li>
+        <li><b>Loading looks broken.</b> A blank white screen, then grey boxes and buttons that change size.</li>
+        <li><b>Location can dead-end.</b> If location fails, "Try Again" is the only option.</li>
+        <li><b>Login before anything.</b> Add, Subscribe, Cart and Profile all require login first.</li>
+        <li><b>Subscription is hidden</b> behind an unlabelled calendar icon, and the product page has no sticky Add bar.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Top 6 recommendations</h3>
+  <table>
+    <thead><tr><th style="width:6mm">#</th><th>Recommendation</th><th style="width:22mm">Addresses</th><th style="width:52mm">Expected result</th><th style="width:16mm">Effort</th></tr></thead>
+    <tbody>
+      <tr><td class="id">1</td><td><b>Rebuild the hero carousel</b> on the UI thread with display-sized, cached banner images and deferred auto-play.</td><td>P1</td><td>Smooth first impression; carousel jank under 5%.</td><td>Low–Med</td></tr>
+      <tr><td class="id">2</td><td><b>Instant home from cache</b> plus exact-size skeletons; keep the splash until the first render.</td><td>P2, P3</td><td>Home usable in under 3 s; no blank screen or layout jumps.</td><td>Medium</td></tr>
+      <tr><td class="id">3</td><td><b>Guest cart</b>: let people add and subscribe first, and log in at checkout with OTP auto-read.</td><td>U3</td><td>Fewer drop-offs before the first order.</td><td>Medium</td></tr>
+      <tr><td class="id">4</td><td><b>Location fallback</b>: explain before asking, and offer pincode / address search and "browse anyway".</td><td>U1, U2</td><td>No dead ends on first launch.</td><td>Low</td></tr>
+      <tr><td class="id">5</td><td><b>Make subscription visible</b>: labelled "Subscribe &amp; save 5%" buttons and a sticky price / Add / Subscribe bar.</td><td>U5, U10, U11</td><td>More add-to-carts and subscriptions from the product page.</td><td>Low</td></tr>
+      <tr><td class="id">6</td><td><b>Image pipeline and virtualised home</b>: CDN-resized WebP, expo-image caching, FlashList sections.</td><td>P1, P4</td><td>Lower memory use; smooth first scroll.</td><td>Medium</td></tr>
+    </tbody>
+  </table>
+  <p class="tiny muted" style="margin-top:3mm">IDs: P = performance finding (pages 4–5), U = UX / accessibility finding (pages 6–9). Effort is indicative and assumes access to the existing codebase.</p>
+
+  <div class="footer"><span>Eggoz app review · independent &amp; unofficial</span><span>2</span></div>
+</section>
+
+<!-- ============ 3. METHOD + RESULTS ============ -->
+<section class="page">
+  <div class="eyebrow">02 · How it was tested</div>
+  <h2 style="margin-top:2mm">Method and measured performance</h2>
+
+  <div class="two" style="grid-template-columns: 1.15fr 1fr; margin-bottom:5mm">
+    <table class="small" style="font-size:8.2pt">
+      <tbody>
+        <tr><td class="muted" style="width:24mm">App</td><td>com.eggozconsumerapp v1.0.7 (build 19), React Native with Hermes</td></tr>
+        <tr><td class="muted">Device</td><td>Android 16 emulator (arm64, single vCPU, 1080 × 2400, 420 dpi) on an Apple-silicon Mac</td></tr>
+        <tr><td class="muted">Session</td><td>Guest mode ("Skip"), GPS set to Gurugram</td></tr>
+        <tr><td class="muted">Tools</td><td>adb with scripted, repeatable swipes; Android frame statistics (<i>dumpsys gfxinfo</i>); UI-hierarchy dumps; pixel-level contrast sampling</td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><b>How to read the numbers.</b> To look smooth at 60 fps, each frame must be drawn within <b>16.7 ms</b>.
+      Android counts a frame as <i>janky</i> when it misses that deadline. Lower is better; under 5% generally feels smooth.
+      <br><br>Emulator figures are directional. The emulator has a single CPU core, so absolute numbers will be higher than on a real phone.
+      They should be confirmed on a real mid-range Android phone, ideally side by side with the improved build.</div>
+  </div>
+
+  <div class="chart">
+    <div class="chart-title">Janky frames by scenario (lower is better)</div>
+    <div class="chart-sub">Share of frames that missed the 16.7 ms deadline · average of the runs shown</div>
+    <div class="bars">
+      <div class="plot-overlay">
+        <div class="gl" style="left:0%"><span>0%</span></div>
+        <div class="gl" style="left:33.33%"><span>20%</span></div>
+        <div class="gl" style="left:66.67%"><span>40%</span></div>
+        <div class="gl" style="left:100%"><span>60%</span></div>
+        <div class="target" style="left:8.33%"><span>Target &lt; 5%</span></div>
+      </div>
+      <div class="row"><div class="lab">Hero carousel auto-playing<span>after load, untouched · 1 run</span></div><div class="track"><div class="bar" style="width:78.67%"></div><div class="val" style="left:78.67%">47.2%</div></div></div>
+      <div class="row"><div class="lab">Hero carousel swiped by hand<span>after load · 6 swipes · 1 run</span></div><div class="track"><div class="bar" style="width:78.33%"></div><div class="val" style="left:78.33%">47.0%</div></div></div>
+      <div class="row"><div class="lab">First scroll after launch<span>cold start · 3 runs (30–54%)</span></div><div class="track"><div class="bar" style="width:74.83%"></div><div class="val" style="left:74.83%">44.9%</div></div></div>
+      <div class="row"><div class="lab">First 10 s after launch, no touch<span>cold start · 2 runs (31–35%)</span></div><div class="track"><div class="bar" style="width:54.67%"></div><div class="val" style="left:54.67%">32.8%</div></div></div>
+      <div class="row"><div class="lab">Feed scroll once loaded<span>warm · 2 runs (3.3–3.9%)</span></div><div class="track"><div class="bar" style="width:6%"></div><div class="val" style="left:6%">3.6%</div></div></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:9mm">All measurements</h3>
+  <table>
+    <thead><tr><th>Scenario</th><th class="num">Runs</th><th class="num">Janky frames</th><th class="num">Median frame</th><th class="num">99th percentile</th></tr></thead>
+    <tbody>
+      <tr><td>Cold launch → home content visible</td><td class="num">3</td><td class="num">—</td><td class="num" colspan="2" style="text-align:right">8.6 s · 9.6 s · 9.6 s (±1 s)</td></tr>
+      <tr><td>Hero carousel auto-playing, untouched (after load)</td><td class="num">1</td><td class="num">47.2%</td><td class="num">32 ms</td><td class="num">150 ms</td></tr>
+      <tr><td>Hero carousel, 6 manual swipes (after load)</td><td class="num">1</td><td class="num">47.0%</td><td class="num">32 ms</td><td class="num">150 ms</td></tr>
+      <tr><td>First home scroll right after cold launch</td><td class="num">3</td><td class="num">29.8–54.3%</td><td class="num">27–32 ms</td><td class="num">101–300 ms</td></tr>
+      <tr><td>First 10 s after cold launch, no touch</td><td class="num">2</td><td class="num">31.1–34.5%</td><td class="num">32–38 ms</td><td class="num">117–150 ms</td></tr>
+      <tr class="good"><td>Home feed scroll once content has loaded</td><td class="num">2</td><td class="num">3.3–3.9%</td><td class="num">16–20 ms</td><td class="num">32–44 ms</td></tr>
+    </tbody>
+  </table>
+  <p class="tiny muted" style="margin-top:2.5mm">Launch time is measured by polling the UI until "Best Selling" is on screen, so it includes the branded splash and has about ±1 s resolution.
+    Runs where a system or login sheet could have been open were discarded.</p>
+
+  <div class="footer"><span>Eggoz app review · independent &amp; unofficial</span><span>3</span></div>
+</section>
+
+<!-- ============ 4. P1 CAROUSEL ============ -->
+<section class="page">
+  <div class="eyebrow">03 · Performance</div>
+  <div class="section-head" style="margin-top:2mm"><span class="pill hi">P1 · High</span></div>
+  <h2>The hero carousel is the first thing customers see, and the least smooth part of the app</h2>
+
+  <div class="grid-shot" style="margin-top:4mm">
+    <div>
+      <div class="phone">
+        <img src="screens/home.png" alt="Home screen with hero carousel">
+        <div class="hl" style="left:1%; top:17.4%; width:98%; height:22.4%"></div>
+        <div class="mk" style="left:12%; top:17.4%">P1</div>
+      </div>
+      <div class="cap">The carousel auto-advances and takes up the most prominent area of home.</div>
+    </div>
+    <div>
+      <h3>What was measured</h3>
+      <ul class="small">
+        <li>With the carousel <b>auto-playing and untouched</b>, <b>47% of frames were janky</b>. The median frame took 32 ms, which is about 30 fps instead of 60.</li>
+        <li><b>Swiping it by hand</b> gave the same result (47% janky), even though the banners had already loaded.</li>
+        <li>For comparison, scrolling the product feed once loaded is smooth (3–4% janky). The problem is concentrated in the carousel and in first load, not in the whole app.</li>
+        <li>Android's frame statistics show many <i>slow UI-thread</i> frames during auto-play (85 of 303) and occasional <i>slow bitmap uploads</i>.</li>
+      </ul>
+      <h3 style="margin-top:4mm">Why it matters</h3>
+      <p class="small">The carousel carries the offers ("₹250 extra", "5% off on subscription") and is on screen every time the app opens. A stuttering hero makes the whole app feel slow, even where it isn't.</p>
+      <h3 style="margin-top:4mm">Likely causes <span class="muted" style="font-weight:500">(to confirm with source access)</span></h3>
+      <ul class="small">
+        <li>The active-slide / dot index is held in React state high in the home tree, so <b>each auto-advance re-renders the home screen</b>.</li>
+        <li>Banner images are larger than their on-screen size and get decoded or re-uploaded as slides change.</li>
+        <li>Looping or peeking slides render extra full-size images during the transition.</li>
+        <li>Auto-play starts while the rest of home is still mounting and fetching.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box cream" style="margin-top:6mm">
+    <h3>Recommended fix</h3>
+    <ul class="small" style="columns:2; column-gap:8mm; margin-bottom:1mm">
+      <li>Drive the slide position and pagination dots from a <b>Reanimated shared value</b>, e.g. react-native-reanimated-carousel or a paged FlatList. That means zero React re-renders per slide.</li>
+      <li>Move the carousel into its own <b>memoised component</b> so home never re-renders because of it.</li>
+      <li>Serve banners at <b>display size</b> (about 1080 px wide, WebP/AVIF, under 150 KB) through CDN resizing.</li>
+      <li>Render with <b>expo-image</b>: memory and disk cache, a blur-hash placeholder, and prefetching of the next slide.</li>
+      <li>Start auto-play only <b>after home's first render</b>, and pause it when off-screen or when the app is in the background.</li>
+      <li>Use a fixed aspect-ratio container so nothing shifts when a banner arrives.</li>
+    </ul>
+    <p class="small" style="margin:2mm 0 0"><b>Target:</b> under 5% janky frames and no frame over 100 ms, verified with the same scripted test.</p>
+  </div>
+
+  <div class="footer"><span>Eggoz app review · independent &amp; unofficial</span><span>4</span></div>
+</section>
+
+<!-- ============ 5. FIRST LOAD ============ -->
+<section class="page">
+  <div class="eyebrow">03 · Performance</div>
+  <h2 style="margin-top:2mm">The first 10 seconds: slow launch, blank screen, shifting layout</h2>
+
+  <div class="strip strip-sm" style="margin-top:4mm">
+    <div><div class="phone"><img src="screens/load-1-blank.png" alt=""><div class="mk" style="left:50%; top:45%">P3</div></div>
+      <div class="cap"><b>1.</b> About 4 s after re-opening the app from the launcher: a completely blank white screen.</div></div>
+    <div><div class="phone"><img src="screens/load-2-partial.png" alt=""><div class="mk" style="left:50%; top:28%">P3</div></div>
+      <div class="cap"><b>2.</b> Then: no banner, grey boxes instead of products, and the Add and calendar buttons still changing width.</div></div>
+    <div><div class="phone"><img src="screens/load-3-done.png" alt=""></div>
+      <div class="cap"><b>3.</b> Final layout. Every element moved or appeared between frame 2 and frame 3.</div></div>
+  </div>
+
+  <div style="margin-top:6mm">
+    <div class="finding"><div class="t"><span class="pill hi">P2 · High</span>About 9 s from tapping the icon to home content</div>
+      <p>Measured at 8.6 s, 9.6 s and 9.6 s across three cold launches, including the branded splash. Google's Android vitals treat a cold start of 5 s or more as excessive.</p></div>
+    <div class="finding"><div class="t"><span class="pill hi">P3 · High</span>Blank screen, then content that jumps into place</div>
+      <p>There is no skeleton with final dimensions, so images, badges (the coin icon) and buttons appear at different times and push the layout around.</p></div>
+    <div class="finding"><div class="t"><span class="pill md">P4 · Medium</span>The first scroll after launch stutters</div>
+      <p>30–54% janky frames on the first scroll, with worst frames of 101–300 ms. The same scroll is smooth (3–4%) once everything has loaded, which points to work happening at mount time: data arriving, images decoding and lists rendering.</p></div>
+  </div>
+
+  <div class="box cream" style="margin-top:4mm">
+    <h3>Recommended fix</h3>
+    <ul class="small" style="columns:2; column-gap:8mm; margin-bottom:0">
+      <li><b>Cache-first home.</b> Persist the last home response (TanStack Query + MMKV) and render it instantly, then refresh in the background.</li>
+      <li><b>Keep the native splash</b> (react-native-bootsplash / expo-splash-screen) until that first render, so there is never a blank white screen.</li>
+      <li><b>Skeletons with exact final sizes</b> for banner, cards and badges, so there is zero layout shift.</li>
+      <li><b>Home as one virtualised FlashList</b>, with sections as item types and horizontal FlashLists for rails, plus memoised cards.</li>
+      <li><b>Trim startup.</b> Lazy-load non-home screens, defer SDK and analytics init, and fetch wallet and coins after first paint.</li>
+      <li><b>Measure continuously.</b> Firebase Performance or Sentry traces in production, plus an automated Flashlight / Maestro run in CI.</li>
+    </ul>
+  </div>
+
+  <div class="footer"><span>Eggoz app review · independent &amp; unofficial</span><span>5</span></div>
+</section>
+
+<!-- ============ 6. UX LOCATION ============ -->
+<section class="page">
+  <div class="eyebrow">04 · UX · First launch</div>
+  <h2 style="margin-top:2mm">Location: two system dialogs, then a possible dead end</h2>
+
+  <div class="strip" style="margin-top:4mm">
+    <div><div class="phone"><img src="screens/permission.png" alt=""><div class="mk" style="left:50%; top:20%">U2</div></div>
+      <div class="cap"><b>1.</b> The system permission dialog appears straight after "Skip", with no explanation from the app.</div></div>
+    <div><div class="phone"><img src="screens/accuracy.png" alt=""><div class="mk" style="left:50%; top:20%">U2</div></div>
+      <div class="cap"><b>2.</b> A second dialog follows, asking the user to turn on Google Location Accuracy.</div></div>
+    <div><div class="phone"><img src="screens/location-unavailable.png" alt=""><div class="mk" style="left:50%; top:38%">U1</div></div>
+      <div class="cap"><b>3.</b> After "No thanks": "Location unavailable", with "Try Again" as the only action.</div></div>
+  </div>
+
+  <div style="margin-top:6mm">
+    <div class="finding"><div class="t"><span class="pill hi">U1 · High</span>A location failure blocks the whole app</div>
+      <p>There is no way to enter a pincode or address, pick a saved address or browse products. Anyone who declines a prompt, is indoors with weak GPS or is ordering for a different address is stuck.</p>
+      <p class="fix">Offer "Enter pincode / search address" (Places autocomplete) and "Browse products", fall back to approximate location, and remember the chosen address.</p></div>
+    <div class="finding"><div class="t"><span class="pill md">U2 · Medium</span>Permission is requested before the user knows why</div>
+      <p>Two system dialogs appear back to back on first use. Unexplained prompts are more likely to be declined, and on Android a second refusal blocks the prompt permanently.</p>
+      <p class="fix">Show a short in-app sheet first ("We use your location to check delivery to your area"), with "Use current location" and "Enter pincode". Only request Location Accuracy if a precise fix actually fails.</p></div>
+  </div>
+
+  <div class="footer"><span>Eggoz app review · independent &amp; unofficial</span><span>6</span></div>
+</section>
+
+<!-- ============ 7. UX HOME ============ -->
+<section class="page">
+  <div class="eyebrow">04 · UX · Home</div>
+  <h2 style="margin-top:2mm">Home: the key actions are present but hard to read</h2>
+
+  <div style="display:grid; grid-template-columns: 50mm 50mm 1fr; gap:6mm; margin-top:4mm">
+    <div>
+      <div class="phone">
+        <img src="screens/home.png" alt="">
+        <div class="mk" style="left:50%; top:7%">U4</div>
+        <div class="mk" style="left:66%; top:6%">U9</div>
+        <div class="mk" style="left:40.5%; top:50%">U6</div>
+        <div class="mk" style="left:31%; top:81.5%">U15</div>
+        <div class="mk" style="left:44%; top:88.7%">U5</div>
+        <div class="mk" style="left:90%; top:97%">U8</div>
+      </div>
+      <div class="cap">Top of home after load.</div>
+    </div>
+    <div>
+      <div class="phone">
+        <img src="screens/home-sections.png" alt="">
+        <div class="mk" style="left:70%; top:45%">U7</div>
+      </div>
+      <div class="cap">Further down: the same products repeat, and a one-card row.</div>
+    </div>
+    <div class="narrow">
+      <div class="finding"><div class="t"><span class="pill hi">U5 · High</span>Subscription is an unlabelled icon</div>
+        <p>Subscription is the core of the model, but its entry point is a calendar icon with no text and no screen-reader label.</p>
+        <p class="fix">A text button, "Subscribe · save 5%".</p></div>
+      <div class="finding"><div class="t"><span class="pill md">U4 · Medium</span>No delivery address in the header</div>
+        <p>The header shows "Order before Midnight" but not <i>where</i> you're ordering for, or how to change it.</p>
+        <p class="fix">An address chip: "Delivering to Sector 29, Gurugram ▾".</p></div>
+      <div class="finding"><div class="t"><span class="pill md">U6 · Medium</span>Product cards are very tall</div>
+        <p>About two products fit per screen, with a large gap between the "Earn" badge and the buttons.</p>
+        <p class="fix">A compact card: image, name, price per egg, and a +/– stepper.</p></div>
+      <div class="finding"><div class="t"><span class="pill lo">U7 · Low</span>Repeated products, half-empty rows</div>
+        <p>The same SKUs appear in Best Selling, Protein Plus and White. Single-product sections leave blank space.</p></div>
+      <div class="finding"><div class="t"><span class="pill lo">U8 · Low</span>The floating tab bar covers content</div>
+        <p>The last row always sits under the tab bar. Add bottom inset padding to the list.</p></div>
+      <div class="finding"><div class="t"><span class="pill lo">U9 · Low</span>Unexplained "0" and "₹0" badges</div>
+        <p>It's not clear which badge is coins and which is wallet, and the coin icon sometimes loads late. Label both.</p></div>
+    </div>
+  </div>
+
+  <div class="footer"><span>Eggoz app review · independent &amp; unofficial</span><span>7</span></div>
+</section>
+
+<!-- ============ 8. UX PRODUCT + CATEGORY ============ -->
+<section class="page">
+  <div class="eyebrow">04 · UX · Product &amp; category</div>
+  <h2 style="margin-top:2mm">Product page: great content, but the buy button scrolls away</h2>
+
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:7mm; margin-top:4mm">
+    <div><div class="phone">
+        <img src="screens/product.png" alt="">
+        <div class="mk" style="left:88%; top:48.6%">U12</div>
+        <div class="mk" style="left:61%; top:55%">U5</div>
+        <div class="mk" style="left:86%; top:55%">U10</div>
+        <div class="mk" style="left:86%; top:64.6%">U11</div>
+      </div><div class="cap">Top of the product page.</div></div>
+    <div><div class="phone">
+        <img src="screens/product-scrolled.png" alt="">
+        <div class="mk" style="left:50%; top:94%">U10</div>
+      </div><div class="cap">After one scroll the price, Add and Subscribe are gone.</div></div>
+    <div><div class="phone">
+        <img src="screens/category.png" alt="">
+        <div class="mk" style="left:70%; top:62%">U13</div>
+      </div><div class="cap">Category: one product per category in our session.</div></div>
+  </div>
+
+  <div style="margin-top:6mm">
+    <div class="finding"><div class="t"><span class="pill hi">U10 · High</span>No sticky price and Add bar</div>
+      <p>Most of the page (nutrition, farms, safety checks) is below the fold, and by the time a customer is convinced, the buy button has scrolled away.</p>
+      <p class="fix">A sticky bottom bar with price, a quantity stepper, "Add" and "Subscribe &amp; save 5%".</p></div>
+    <div class="finding"><div class="t"><span class="pill md">U11 · Medium</span>The subscription offer is passive text</div>
+      <p>"Subscribe now and get an extra 5% off" looks like a banner but does nothing, and the actual subscribe action is the unlabelled calendar icon (U5).</p>
+      <p class="fix">Make it the subscribe button itself, with the delivery frequency picker (daily / alternate days / weekly) inline.</p></div>
+    <div class="finding"><div class="t"><span class="pill lo">U12 · Low</span>Duplicated title text</div>
+      <p>"Eggoz Nutrition Protein Plus Eggs (10 pieces) (10 pieces)": the pack size is appended twice.</p></div>
+    <div class="finding"><div class="t"><span class="pill lo">U13 · Low</span>The category screen is mostly empty</div>
+      <p>With one product per category, about two-thirds of the screen is blank. Category chips on home, or a pack-size selector (6 / 10 / 25 / 30) on the product page, would serve the same purpose with less navigation.</p></div>
+  </div>
+
+  <div class="footer"><span>Eggoz app review · independent &amp; unofficial</span><span>8</span></div>
+</section>
+
+<!-- ============ 9. LOGIN WALL, SEARCH, A11Y ============ -->
+<section class="page">
+  <div class="eyebrow">04 · UX · Ordering &amp; accessibility</div>
+  <h2 style="margin-top:2mm">Guests can browse, but can't start an order</h2>
+
+  <div style="display:grid; grid-template-columns: 46mm 46mm 1fr; gap:6mm; margin-top:4mm">
+    <div><div class="phone"><img src="screens/cart-wall.png" alt=""><div class="mk" style="left:84%; top:81%">U3</div></div>
+      <div class="cap">Add, Subscribe, Cart and Profile all open this sheet for guests.</div></div>
+    <div><div class="phone"><img src="screens/search.png" alt=""><div class="mk" style="left:42%; top:23%">U14</div></div>
+      <div class="cap">Search: the chip icons are empty grey circles.</div></div>
+    <div class="narrow">
+      <div class="finding"><div class="t"><span class="pill hi">U3 · High</span>Login is required before adding to cart</div>
+        <p>The app offers "Skip" but then blocks every purchase action. That means asking for a phone number and an OTP at the moment of highest intent, before the customer has even built a cart.</p>
+        <p class="fix">Keep a guest cart on the device, ask for login at checkout, auto-read the OTP (Android SMS Retriever) and offer Phone Number Hint so the number can be filled in one tap.</p></div>
+      <div class="finding"><div class="t"><span class="pill lo">U14 · Low</span>Search empty state</div>
+        <p>The chip icons render as empty circles, and most of the screen is unused.</p>
+        <p class="fix">Show recent searches and best sellers, and give results instantly as the user types.</p></div>
+      <div class="finding"><div class="t"><span class="pill md">U16 · Medium</span>Missing screen-reader labels</div>
+        <p>5 of the 18 tappable elements on home have no text or label: all three carousel banners and both calendar (subscribe) buttons. TalkBack users can't tell what they do.</p>
+        <p class="fix">Add accessibilityLabel and accessibilityRole to icon buttons and banners.</p></div>
+    </div>
+  </div>
+
+  <div class="section-head" style="margin-top:7mm"><span class="pill md">U15 · Medium</span><h3 style="margin:0">Text contrast is below WCAG AA (4.5 : 1) in 5 of 6 samples</h3></div>
+  <p class="small muted" style="margin-bottom:2mm">Colours sampled directly from screenshot pixels. The brand orange can stay as a fill colour; it just needs dark text, or a deeper shade wherever text sits on it or in it.</p>
+  <table>
+    <thead><tr><th>Element</th><th class="num">Measured</th><th>Suggested change</th><th class="num">New ratio</th></tr></thead>
+    <tbody>
+      <tr><td>White text on orange buttons ("Login", "Try Again")</td><td class="num">2.28 : 1</td><td><span class="swatch" style="background:#c2410c"></span>#C2410C fill, or <span class="swatch" style="background:#1c1917"></span>#1C1917 text on the current orange</td><td class="num">5.18 / 7.66</td></tr>
+      <tr><td>Orange "Add" label on white</td><td class="num">2.28 : 1</td><td><span class="swatch" style="background:#c2410c"></span>#C2410C label and border</td><td class="num">5.18</td></tr>
+      <tr><td>"Earn 10" coin badge text</td><td class="num">2.02 : 1</td><td><span class="swatch" style="background:#8a6512"></span>#8A6512 on the same cream badge</td><td class="num">4.97</td></tr>
+      <tr><td>Search placeholder text</td><td class="num">2.10 : 1</td><td><span class="swatch" style="background:#767676"></span>#767676</td><td class="num">4.54</td></tr>
+      <tr><td>Grey price-per-piece text</td><td class="num">3.95 : 1</td><td><span class="swatch" style="background:#6b6b6b"></span>#6B6B6B</td><td class="num">5.33</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer"><span>Eggoz app review · independent &amp; unofficial</span><span>9</span></div>
+</section>
+
+<!-- ============ 10. ROADMAP ============ -->
+<section class="page">
+  <div class="eyebrow">05 · Plan</div>
+  <h2 style="margin-top:2mm">Proposed roadmap and success metrics</h2>
+  <p class="small muted" style="margin-bottom:3mm">Phases are ordered by impact per effort. Durations are indicative for one React Native developer working in the existing codebase.</p>
+
+  <div class="box" style="padding-top:1mm; padding-bottom:1mm">
+    <div class="phase"><div class="when">Phase 1<span>Weeks 1–2 · Quick wins</span></div>
+      <div class="small">Rebuild the hero carousel (P1) · sticky price / Add / Subscribe bar (U10) · labelled "Subscribe &amp; save" buttons (U5, U11) ·
+        contrast-safe colour tokens and accessibility labels (U15, U16) · delivery-address chip (U4) · tab-bar inset, title fix, badge labels (U8, U9, U12).</div></div>
+    <div class="phase"><div class="when">Phase 2<span>Weeks 3–5 · Speed</span></div>
+      <div class="small">Cache-first home and native splash until first render (P2) · exact-size skeletons (P3) · image pipeline: CDN-resized WebP and expo-image (P1, P4) ·
+        home as one virtualised FlashList (P4) · startup trimming · production performance monitoring and a CI performance test.</div></div>
+    <div class="phase"><div class="when">Phase 3<span>Weeks 6–8 · Conversion</span></div>
+      <div class="small">Pre-permission sheet and location fallback with pincode / address search (U1, U2) · guest cart with login at checkout and OTP auto-read (U3) ·
+        compact product cards and de-duplicated sections (U6, U7) · pack-size selector and category rethink (U13) · search empty state (U14).</div></div>
+  </div>
+
+  <h3 style="margin-top:7mm">How success is measured</h3>
+  <table>
+    <thead><tr><th>Metric</th><th class="num">Today (measured)</th><th class="num">Target</th></tr></thead>
+    <tbody>
+      <tr><td>Cold launch → home content usable</td><td class="num">8.6–9.6 s</td><td class="num">&lt; 3 s</td></tr>
+      <tr><td>Janky frames while the hero carousel plays</td><td class="num">47%</td><td class="num">&lt; 5%</td></tr>
+      <tr><td>Janky frames on the first scroll after launch</td><td class="num">30–54%</td><td class="num">&lt; 5%</td></tr>
+      <tr><td>Worst frame during carousel and first scroll</td><td class="num">150–300 ms</td><td class="num">&lt; 100 ms</td></tr>
+      <tr><td>Blank white screen while opening</td><td class="num">Seen</td><td class="num">Never</td></tr>
+      <tr><td>Sampled text elements failing WCAG AA contrast</td><td class="num">5 of 6</td><td class="num">0</td></tr>
+      <tr><td>Guest can add to cart and see a total</td><td class="num">No</td><td class="num">Yes</td></tr>
+      <tr><td>Location failure has a manual path</td><td class="num">No</td><td class="num">Yes</td></tr>
+    </tbody>
+  </table>
+  <p class="tiny muted" style="margin-top:2.5mm">Every "today" figure was produced by repeatable adb scripts. The same scripts run against the improved build give a like-for-like before/after.</p>
+
+  <div class="box cream" style="margin-top:7mm">
+    <h3>Next step</h3>
+    <p class="small" style="margin-bottom:2mm">I'm happy to show this in practice: a working React Native prototype of the redesigned <b>Home</b> (with the new hero carousel), <b>Product</b> and <b>Cart</b>
+      screens. It would be measured with the same test scripts so the improvement is visible in numbers, and it would run on your phones through Expo.</p>
+    <p class="small" style="margin:0"><b>Adityan</b> · React Native &amp; Flutter Developer · Portfolio: <a href="https://adityan-phi.vercel.app/en">adityan-phi.vercel.app/en</a></p>
+  </div>
+
+  <div class="footer"><span>Eggoz app review · independent &amp; unofficial</span><span>10</span></div>
+</section>
+
+</body>
+</html>
