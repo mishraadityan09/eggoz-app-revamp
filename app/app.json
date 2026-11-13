@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "Eggoz Concept",
+    "slug": "eggoz-concept",
+    "scheme": "eggozconcept",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.adityan.eggozconcept"
+    },
+    "android": {
+      "package": "com.adityan.eggozconcept",
+      "adaptiveIcon": {
+        "backgroundColor": "#F7B045",
+        "foregroundImage": "./assets/android-icon-foreground.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "apiBaseUrl": "https://eggoz-concept-cdn.vercel.app"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FDF8E9",
+          "image": "./assets/splash-wordmark.png",
+          "imageWidth": 220,
+          "resizeMode": "contain"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "We use your location only to check delivery to your area."
+        }
+      ],
+      "expo-image",
+      "expo-font"
+    ]
+  }
+}
