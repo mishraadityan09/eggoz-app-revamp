@@ -18,6 +18,8 @@ developer role at Eggoz.
 | [`docs/eggoz-review/`](docs/eggoz-review/) | PDF source (`report.html`) and reference screenshots (`screens/`) |
 | [`mock-data/catalog.json`](mock-data/catalog.json) | Products, prices, banners and copy observed in the real app |
 | [`scripts/perf/`](scripts/perf/) | adb scripts used to measure the app — rerun them on the prototype for before/after |
+| [`app/`](app/) | The prototype (Expo SDK 58, React Native 0.88) |
+| [`backend/`](backend/) | Static API + image CDN, deployed to **https://eggoz-concept-cdn.vercel.app** (`npm run deploy`) |
 | [`CLAUDE.md`](CLAUDE.md) | Instructions for the AI coding agent (also linked as `AGENTS.md`) |
 
 ## Headline findings
@@ -31,6 +33,11 @@ developer role at Eggoz.
 | Location failure has a manual path | No (dead end) | Yes |
 
 Full list: [`docs/findings.md`](docs/findings.md).
+
+**Prototype so far (13 Nov, interim, same emulator):** home drawn in 2–4 s with no blank screen
+(Eggoz: products listed after 7 s to more than 12 s, with blank white phases); ~0.2 MB downloaded
+at launch with caches cleared vs ~27 MB; carousel worst frame ~0.1 s vs 2.3 s — but carousel jank is still 34–53%, so that target is **not met yet**.
+Details: [`docs/measurements.md`](docs/measurements.md).
 
 ## Start here (prototype day)
 

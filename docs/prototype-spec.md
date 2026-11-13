@@ -17,9 +17,14 @@ that hit the targets (carousel and first-scroll jank < 5%, home < 3 s cached, no
 Bottom tabs (floating style allowed, but content must never sit under it — U8): **Home · Search · Cart · Profile**.
 No separate Category tab (U13). Product is a stack screen. Location and Subscribe are bottom sheets.
 
-### 0. Launch & location (P2, P3, U1, U2)
+### 0. Launch, welcome & location (P2, P3, U1, U2, U3)
 - Native splash (cream `#FDF8E9`, text wordmark "Eggoz" + small "concept redesign") held until the
   first home render — then cross-fade. Never a blank white frame.
+- **Welcome / login** (first launch): value props, +91 phone input with validation (6–9 start),
+  "Use this phone's number" (mocks Phone Number Hint), Get OTP → 6-box OTP screen that auto-fills
+  after 2 s (mocks SMS Retriever; `autoComplete="sms-otp"`), resend timer. A full-width
+  **"Explore as guest"** button is equal in weight to login — not a tiny "Skip".
+- Returning user (session + address persisted) → straight to cached home, no onboarding.
 - First launch only: **pre-permission sheet** over home skeleton —
   "Check delivery to your area" · [Use current location] · [Enter pincode] · "Browse without location".
 - Use current location → `expo-location` permission → reverse-geocode (mock: any coords → "Sector 29, Gurugram").
@@ -82,7 +87,7 @@ Data is cache-first: persisted react-query cache renders instantly on later laun
 - Profile: guest state with "Log in" + "About this concept" (states it's an unofficial redesign by
   Adityan, links portfolio).
 
-## Design tokens (`app/src/theme/tokens.ts`)
+## Design tokens (`app/src/theme/tokens.js`)
 
 Observed brand colours, with accessible variants where the originals fail contrast (U15):
 
@@ -108,11 +113,11 @@ weights 400/600/700. Touch targets ≥ 48 dp.
 
 | # | Deliverable | Findings |
 |---|---|---|
-| M1 | Expo app in `app/`, tabs + product stack, tokens, mock API (latency), react-query persist, zustand stores, splash | P2, P3 |
-| M2 | Home: header, hero carousel, chips, rails, compact cards, skeletons | P1, P3, P4, U4–U9, U16 |
+| M1 | **Every flow until home has loaded**: foundation (Expo app, tabs + product stack, tokens, mock API with latency, react-query persist, zustand stores) · splash held until first content · welcome / login (phone + mock OTP auto-read, or explore as guest) · location (pre-permission, GPS with timeout, pincode, not-serviceable, browse anyway) · home header address chip · exact-size skeleton → content · returning users go straight to cached home | P2, P3, U1, U2, U4 |
+| M2 | Home showpiece: hero carousel, chips, rails, compact cards with subscribe, real product images. **Done 13 Nov:** UI-thread carousel (5 slides, auto-play with pauses, equal dots), real Eggoz photos + live prices from our Vercel CDN (WebP + blurhash), labelled calendar "Schedule · save 5%" on every card with a working schedule sheet, load-test catalog toggle (~480 products). **Open:** category chips. | P1, P4, U5–U9, U16 |
 | M3 | Product page: gallery, pack sizes, sticky bar, subscribe sheet | U5, U10–U13 |
-| M4 | Guest cart + mock login-at-checkout with OTP auto-fill | U3 |
-| M5 | Launch/location flow: pre-permission, pincode, browse anyway | U1, U2 |
+| M4 | Full guest cart + login at checkout (reuses the M1 OTP screen) | U3 |
+| M5 | _Merged into M1 at Adityan's request (13 Nov)._ | — |
 | M6 | Release build; run all perf scripts (≥ 3 runs); contrast + UI-dump checks; screenshots; fill measurements table | all |
 | M7 (optional) | Search, profile/about, 60–90 s screen recording of the demo flow | U14 |
 
