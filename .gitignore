@@ -14,3 +14,10 @@ app/dist/
 *.jks
 .env
 .env.*
+
+# Vercel project link + generated CDN output (rebuilt by backend/build.mjs)
+.vercel/
+backend/public/
+
+# Release signing key + passwords — never commit (back them up somewhere safe)
+app/credentials/

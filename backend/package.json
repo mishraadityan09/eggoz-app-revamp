@@ -1,0 +1,16 @@
+{
+  "name": "eggoz-concept-cdn",
+  "private": true,
+  "type": "module",
+  "description": "Static API + image CDN for the Eggoz concept prototype (deployed to Vercel).",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node serve.mjs",
+    "deploy": "node build.mjs && cd public && vercel deploy --prod --yes"
+  },
+  "devDependencies": {
+    "blurhash": "^2.0.5",
+    "sharp": "^0.35.5",
+    "vercel": "^65.15.0"
+  }
+}
